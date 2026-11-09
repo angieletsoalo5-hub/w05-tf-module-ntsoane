@@ -228,6 +228,6 @@ git commit -m "docs: add plan/apply/destroy screenshots"
 
 ## Link to commit hash
 
-Submission commit (merge of `feature/sandbox-module` into `main`): **`COMMIT_HASH_PLACEHOLDER`**
+Submission commit (merge of `feature/sandbox-module` into `main`): **`97bd0f47d616f191059ab4a52f5413935b4d4b60`** (short: `97bd0f4`)
 
 > This is the hash of the commit at submission time. A commit can't contain its own hash, so this README is updated in one small follow-up commit that points to the merge commit above. Check it with `git log --oneline --graph`. If you push to GitHub, the link will be `https://github.com/<your-username>/w05-tf-module-ntsoane/commit/<hash>`.
