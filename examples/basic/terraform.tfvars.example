@@ -1,0 +1,11 @@
+# Copy this file to terraform.tfvars and edit the values.
+# Placeholder values only - NEVER put access keys or secrets in this file.
+aws_region    = "us-east-1"
+aws_profile   = "sandbox"
+project_name  = "w05-sandbox"
+environment   = "lab"
+instance_type = "t3.micro"
+bucket_prefix = "w05-tf-module-your-name"
+owner         = "your-name"
+week          = "w05"
+purpose       = "terraform-module-practice"
