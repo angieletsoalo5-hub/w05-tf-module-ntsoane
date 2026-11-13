@@ -19,7 +19,7 @@ w05-tf-module-ntsoane/
 │       ├── terraform.tfvars.example
 │       └── .terraform.lock.hcl    <- provider version lock (safe to commit)
 └── docs/
-    └── screenshots/               <- add plan/apply/destroy screenshots here
+    └── screenshots/               <- plan/apply/destroy, console, MFA, budget alert, Gitleaks
 ```
 
 ---
@@ -143,12 +143,14 @@ The full module reference (all inputs, types, validation rules and outputs) is i
 - `t3.micro` and a small S3 bucket cost little, and may be covered by the AWS Free Tier depending on your account. The EC2 instance is billed **for every hour it runs**, so destroy it when you're done.
 - Always run `terraform destroy` at the end of the session (see below), then check the EC2 and S3 consoles in `us-east-1` to make sure nothing is left.
 - `force_destroy` is `false`, so destroy **fails if the bucket still has objects**. Empty the bucket first (`aws s3 rm s3://<bucket_name> --recursive --profile sandbox`). This is a deliberate safety net.
-- Keep an AWS Budget alert on the account.
+- An AWS Budget (**My Zero-Spend Budget**, $1.00) with an alert is set on the account - evidence: `docs/screenshots/budget-alert.png`.
 
 ---
 
 ## Security notes
 
+- **MFA is enabled** on the account (virtual MFA device) - evidence: `docs/screenshots/mfa.png`.
+- **Account IDs redacted:** every screenshot was checked and the 12-digit account number (and any ARN containing it) is covered.
 - **No credentials in code.** The provider uses a local AWS CLI profile (`aws_profile`). Keys stay in `%USERPROFILE%\.aws\`.
 - `.gitignore` excludes `.terraform/`, `*.tfstate*`, `*.tfvars` (but keeps `*.tfvars.example`), saved plans and crash logs.
 - `terraform.tfvars.example` contains **placeholder values only**: no secrets and no account IDs.
@@ -157,7 +159,7 @@ The full module reference (all inputs, types, validation rules and outputs) is i
 - Required tags (`module`, `environment`) are merged last, so `extra_tags` can't overwrite them.
 - **Secret scan:** see the Verification log below. Run Gitleaks yourself before submitting:
   ```powershell
-  gitleaks detect --source . -v      # expect: "no leaks found"
+  gitleaks git -v      # expect: "no leaks found"
   ```
 
 ---
@@ -170,6 +172,7 @@ The full module reference (all inputs, types, validation rules and outputs) is i
 | `terraform init -backend=false` + `terraform validate` in `examples/basic` | ✅ `Success! The configuration is valid.` |
 | Variable validation test (`instance_type = "m5.large"`) | ✅ Rejected with `Invalid value for variable` |
 | Required-tag precedence test (`extra_tags = { module = "x" }`) | ✅ `module` stayed `"sandbox"` |
+| Account evidence | ✅ MFA enabled (`mfa.png`) · Budget alert set (`budget-alert.png`) - account ID redacted |
 | Gitleaks (run on my laptop) | ✅ `no leaks found` - see docs/screenshots/gitleaks.png |
 | `terraform plan` / `apply` / `destroy` (run on my laptop, us-east-1) | ✅ Plan: 5 to add · Apply complete: 5 added · Destroy complete: 5 destroyed - see docs/screenshots |
 
@@ -223,6 +226,12 @@ git commit -m "docs: add plan/apply/destroy screenshots"
 3. Merged into `main` with `git merge --no-ff`. The merge commit message contains the PR-style description (summary, changes, testing).
 
 > Pull request #1 (docs/run-evidence -> main) was opened and merged on GitHub: https://github.com/angieletsoalo5-hub/w05-tf-module-ntsoane/pull/1
+
+---
+
+## AI-use declaration
+
+I used an AI assistant (Abacus AI Agent) to help me write the Terraform module and example, draft this README and explain errors and Git steps. I read and checked every file myself. I ran all `terraform`, Gitleaks and Git commands on my own laptop against my own AWS sandbox account, and I took and redacted all screenshots myself.
 
 ---
 
