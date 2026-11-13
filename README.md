@@ -226,6 +226,8 @@ git commit -m "docs: add plan/apply/destroy screenshots"
 3. Merged into `main` with `git merge --no-ff`. The merge commit message contains the PR-style description (summary, changes, testing).
 
 > Pull request #1 (docs/run-evidence -> main) was opened and merged on GitHub: https://github.com/angieletsoalo5-hub/w05-tf-module-ntsoane/pull/1
+>
+> Pull request #2 (docs/account-evidence -> main) added the MFA and budget-alert evidence and the AI-use declaration: https://github.com/angieletsoalo5-hub/w05-tf-module-ntsoane/pull/2
 
 ---
 
@@ -237,6 +239,6 @@ I used an AI assistant (Abacus AI Agent) to help me write the Terraform module a
 
 ## Link to commit hash
 
-Submission commit (merge of PR #1 into `main`): **`11028085a054d194784344aad42bcc8c1b270bcf`** - https://github.com/angieletsoalo5-hub/w05-tf-module-ntsoane/commit/11028085a054d194784344aad42bcc8c1b270bcf
+Submission commit (merge of PR #2 into `main`): **`656b68c472f699774f92cf281229196ccc75d91a`** - https://github.com/angieletsoalo5-hub/w05-tf-module-ntsoane/commit/656b68c472f699774f92cf281229196ccc75d91a
 
-> A commit can't contain its own hash, so the hash above is the merge of PR #1 into `main`. This README note was added in one small follow-up commit after that merge. Check it with `git log --oneline --graph`.
+> A commit can't contain its own hash, so the hash above is the merge of PR #2 into `main`. This README note was added in one small follow-up commit after that merge. Check it with `git log --oneline --graph`.
